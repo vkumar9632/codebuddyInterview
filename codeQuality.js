@@ -15,15 +15,17 @@ function getUsers() {
     // return userProfile;
 
     let obj = {}
-    Promise.all(getUser(), getProfile(), getPosts()).then((value,index)=>{
-        if(index == 0){
-            obj["user"] = value;
+    Promise.all(getUser(), getProfile(), getPosts()).then((value)=>{
+        value.map((data,index)=>{
+          if(index == 0){
+            obj["user"] = data;
         }else if(index == 1){
-            obj['profile'] = value;
+            obj['profile'] = data;
         }
         else if(index == 2){
-            obj['posts'] = value;
-        }
+            obj['posts'] = data;
+        }  
+        })
     })
     return obj;
   }
